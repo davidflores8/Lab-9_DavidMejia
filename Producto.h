@@ -14,6 +14,7 @@ class Producto{
 
         string getNombre();
         string getTipo();
+        string toString();
 
 };
 #endif

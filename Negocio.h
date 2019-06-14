@@ -25,5 +25,6 @@ class Negocio{
 
         vector<Producto*> getProductos();
         void setProductos(vector<Producto*>);
+        string toString();
 };
 #endif

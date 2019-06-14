@@ -22,10 +22,11 @@ int main(){
     vector<Empleados*> empleados;
     vector<Negocio*> negocios;
     int opcion=1;
-    while(opcion>0 && opcion<4){
+    while(opcion>0 && opcion<10){
         cout<<"-- Menu principal -- "<<endl;
         cout<<"1. Crear persona\n2. Crear Negocio"<<endl;
-        cout<<"3. Listar personas\n4. Listar Negocios\n5. Salir"<<endl;
+        cout<<"3. Listar personas\n4. Listar Negocios\n5. Eliminar personas\n6. Eliminar negocios"<<endl;
+        cout<<"\n7. Ordenes\n8. Gestion de ordenes\n 9.Salir"<<endl;
         cin>>opcion;
         switch(opcion){
             case 1:{
@@ -121,6 +122,88 @@ int main(){
                     cout<<" "<<endl;
             }
             break;
+            case 3:{
+                cout<<"------------- Empleados --------------"<<endl;
+                for (int i = 0; i <empleados.size(); i++)
+                {
+                    cout<<empleados[i]->toString()<<endl;
+                    cout<<" "<<endl;
+                }
+                cout<<" "<<endl;
+                cout<<"------------- Clientes --------------"<<endl;
+                for (int i = 0; i <clientes.size(); i++)
+                {
+                    cout<<clientes[i]->toString()<<endl;
+                    cout<<" "<<endl;
+                }
+                cout<<" "<<endl;
+                cout<<"------------- Repartidores --------------"<<endl;
+                for (int i = 0; i <repartidores.size(); i++)
+                {
+                    cout<<repartidores[i]->toString()<<endl;
+                    cout<<" "<<endl;
+                }
+            }
+            break;
+            case 4:{
+                for (int i = 0; i < negocios.size(); i++)
+                {
+                    cout<<negocios[i]->toString()<<endl;
+                    cout<<" "<<endl;
+
+                }
+                
+            }
+            break;
+            case 5:{
+                int eliminar;
+                int persona_a_eliminar;
+                cout<<"Que desea eliminar?\n1. Empleados\n2. Cliente\n3. Repartidor"<<endl;
+                cin>>eliminar;
+                if(eliminar==1){
+                    cout<<"------------- Empleados --------------"<<endl;
+                    for (int i = 0; i <empleados.size(); i++)
+                    {
+                        cout<<i<<". ";
+                        cout<<empleados[i]->toString()<<endl;
+                        cout<<" "<<endl;
+                    }
+                    cout<<" "<<endl;
+                    cout<<"Ingrese el indice de la persona que desea eliminar: "<<endl;
+                    cin>>persona_a_eliminar;
+                    empleados.erase(empleados.begin()+persona_a_eliminar);
+                    cout<<"Empleado elimiado exitosamente"<<endl;
+                }
+                else if(eliminar==2){
+                    cout<<"------------- Clientes --------------"<<endl;
+                    for (int i = 0; i <clientes.size(); i++)
+                    {
+                        cout<<i<<". ";
+                        cout<<clientes[i]->toString()<<endl;
+                        cout<<" "<<endl;
+                    }
+                    cout<<" "<<endl;
+                    cout<<"Ingrese el indice de la persona que desea eliminar: "<<endl;
+                    cin>>persona_a_eliminar;
+                    clientes.erase(clientes.begin()+persona_a_eliminar);
+                    cout<<"Cliente elimiado exitosamente"<<endl;
+                }
+                if(eliminar==1){
+                    cout<<"------------- Repartidor --------------"<<endl;
+                    for (int i = 0; i <repartidores.size(); i++)
+                    {
+                        cout<<i<<". ";
+                        cout<<repartidores[i]->toString()<<endl;
+                        cout<<" "<<endl;
+                    }
+                    cout<<" "<<endl;
+                    cout<<"Ingrese el indice de la persona que desea eliminar: "<<endl;
+                    cin>>persona_a_eliminar;
+                    repartidores.erase(repartidores.begin()+persona_a_eliminar);
+                    cout<<"Repartidor elimiado exitosamente"<<endl;
+                }
+            }
+
         }
     }
 

@@ -1,4 +1,6 @@
 #include "Negocio.h"
+#include <sstream>
+using std::stringstream;
 
 Negocio::Negocio(){
 
@@ -28,4 +30,15 @@ vector<Producto*> Negocio::getProductos(){
 
 void Negocio::setProductos(vector<Producto*> products){
     productos=products;
+}
+
+string Negocio::toString(){
+    stringstream retorno;
+    retorno<<"Nombre: "<<nombre<<"\nUbicacion: "<<ubicacion<<"\nCantidad de locales: "<<locales;
+    for (int i = 0; i <productos.size(); i++)
+    {
+        retorno<<productos[i]->toString()<<"\n";
+        retorno<<"\n";
+    }
+    return retorno.str();
 }

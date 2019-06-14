@@ -1,4 +1,6 @@
 #include "Producto.h"
+#include <sstream>
+using std::stringstream;
 
 Producto::Producto(){
 
@@ -14,4 +16,10 @@ string Producto::getNombre(){
 }
 string Producto::getTipo(){
     return tipo;
+}
+
+string Producto::toString(){
+    stringstream retorno;
+    retorno<<"\nNombre: "<<nombre<<"\nComestible?: "<<tipo;
+    return retorno.str();
 }
