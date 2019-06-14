@@ -19,5 +19,6 @@ class Cliente:public Persona{
         int getPedidos();
         int ganancias();
         string toString();
+        void aumentarPedido();
 };
 #endif

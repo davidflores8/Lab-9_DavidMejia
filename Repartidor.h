@@ -17,6 +17,7 @@ class Repartidor:public Persona{
         int getOrdenes();
         int ganancias();
         string toString();
+        void aumentarOrden();
 
 
 };

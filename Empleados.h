@@ -17,5 +17,6 @@ class Empleados:public Persona{
         int getTotal_ordenes();
         int ganancias();
         string toString();
+        void aumentarOrdenes();
 };
 #endif

@@ -4,6 +4,8 @@
 #include "Repartidor.h"
 #include "Negocio.h"
 #include "Producto.h"
+#include "Orden.h"
+#include "FileWriter.h"
 
 #include <iostream>
 using std::cin;
@@ -21,6 +23,15 @@ int main(){
     vector<Repartidor*> repartidores;
     vector<Empleados*> empleados;
     vector<Negocio*> negocios;
+    vector<Orden*> ordenes_confirmadas;
+    vector<Orden*> ordenes_en_proceso;
+    FileWriter* fw;
+    fw=new FileWriter();
+    int cliente_seleccionado;
+    int negocio_seleccionado;
+    int producto_seleccionado;
+    int repartidor_seleccionado;
+
     int opcion=1;
     while(opcion>0 && opcion<10){
         cout<<"-- Menu principal -- "<<endl;
@@ -188,7 +199,7 @@ int main(){
                     clientes.erase(clientes.begin()+persona_a_eliminar);
                     cout<<"Cliente elimiado exitosamente"<<endl;
                 }
-                if(eliminar==1){
+                if(eliminar==3){
                     cout<<"------------- Repartidor --------------"<<endl;
                     for (int i = 0; i <repartidores.size(); i++)
                     {
@@ -202,6 +213,136 @@ int main(){
                     repartidores.erase(repartidores.begin()+persona_a_eliminar);
                     cout<<"Repartidor elimiado exitosamente"<<endl;
                 }
+            }
+            break;
+            case 6:{
+                int negocio_a_eliminar;
+                cout<<"-------- Negocios -----------"<<endl;
+                 for (int i = 0; i < negocios.size(); i++)
+                {
+                    cout<<negocios[i]->toString()<<endl;
+                    cout<<" "<<endl;
+
+                }
+                cout<<" "<<endl;
+                cout<<"Ingrese la posision que desea eliminar: "<<endl;
+                cin>>negocio_a_eliminar;
+                negocios.erase(negocios.begin()+negocio_a_eliminar);
+                cout<<"Negocio eliminado correctamente"<<endl;
+            }
+            break;
+            case 7:{
+                    Cliente* cliente;
+                    Negocio* negocio;
+                    Producto* producto;
+                    Repartidor* repartidor;
+                    
+                    cout<<"------------- Clientes para su orden --------------"<<endl;
+                    for (int i = 0; i <clientes.size(); i++)
+                    {
+                        cout<<i<<". ";
+                        cout<<clientes[i]->toString()<<endl;
+                        cout<<" "<<endl;
+                    }
+                    cout<<" "<<endl;
+                    cout<<"Seleccione el cliente de la orden: "<<endl;
+                    cin>>cliente_seleccionado;
+                    cliente=clientes[cliente_seleccionado];
+                    /////////////////////////////////////////////////////////
+                    cout<<"-------- Negocios para su orden-----------"<<endl;
+                    for (int i = 0; i < negocios.size(); i++)
+                    {
+                        cout<<negocios[i]->toString()<<endl;
+                        cout<<" "<<endl;
+
+                    }
+                    cout<<" "<<endl;
+                    cout<<"Ingrese el negocio para su orden: "<<endl;
+                    cin>>negocio_seleccionado;
+                    negocio=negocios[negocio_seleccionado];
+                    /////////////////////////////////////////////////////////
+                    cout<<"-------- Producto para su orden-----------"<<endl;
+                    vector<Producto*>pps;
+                    for (int i = 0; i < negocios[negocio_seleccionado]->getProductos().size(); i++)
+                    {
+                        pps=negocios[negocio_seleccionado]->getProductos();
+                        for (int j = 0; j <pps.size(); j++)
+                        {
+                            //cout<<pps[j]->toString<<endl;
+                            //cout<<" "<<endl;
+                        }
+                    }
+                    cout<<" "<<endl;
+                    cout<<"Ingrese el producto para su orden: "<<endl;
+                    cin>>producto_seleccionado;
+                    producto=negocios[negocio_seleccionado]->getProductos()[producto_seleccionado];
+                    ///////////////////////////////////////////////////////
+                    cout<<"------------- Repartidor para su orden --------------"<<endl;
+                    for (int i = 0; i <repartidores.size(); i++)
+                    {
+                        cout<<i<<". ";
+                        cout<<repartidores[i]->toString()<<endl;
+                        cout<<" "<<endl;
+                    }
+                    cout<<" "<<endl;
+                    cout<<"Ingrese el repartidor para su orden: "<<endl;
+                    cin>>repartidor_seleccionado;
+                    repartidor=repartidores[repartidor_seleccionado];
+                    ordenes_en_proceso.push_back(new Orden(cliente, negocio,repartidor,producto));
+                    cout<<" "<<endl;
+                    cout<<"Orden agregada a las ordenes en proceso"<<endl;
+            }
+            break;
+            case 8:{
+                cout<<"-------------- TODAS LAS ORDENES EN PROCESO -------------------"<<endl;
+                for (int i = 0; i <ordenes_en_proceso.size(); i++)
+                {
+                    cout<<i<<". \n";
+                    cout<<ordenes_en_proceso[i]->toString()<<endl;
+                    cout<<" "<<endl;
+                }
+                int orden_a_confirmar;
+                int opciones;
+                string confirmacion;
+                cout<<"Ingrese la orden que desea confirmar o cancelar: "<<endl;
+                cin>>orden_a_confirmar;
+                cout<<"Que desea hacer?\n1. Confirmar\n2. Cancelar"<<endl;
+                cin>>opciones;
+                //////////////////////////////////////////
+                //////////////////////////////////////////
+                if(opciones==1){
+                    confirmacion="Confirmada";
+                    ordenes_en_proceso[orden_a_confirmar]->setEstado(confirmacion);
+                    clientes[cliente_seleccionado]->aumentarPedido();
+                    for (int i = 0; i <empleados.size() ; i++)
+                    {
+                        empleados[i]->aumentarOrdenes();
+                    }
+                    repartidores[repartidor_seleccionado]->aumentarOrden();
+                }
+                else{
+                    confirmacion="Cancelada";
+                    ordenes_en_proceso[orden_a_confirmar]->setEstado(confirmacion);
+                    ordenes_confirmadas.push_back(ordenes_en_proceso[orden_a_confirmar]);
+                    fw->fileOpen("factura.txt");
+                    fw->write(ordenes_en_proceso[orden_a_confirmar]);
+                    fw->fileClose();
+                }
+                if(confirmacion=="Confirmada"){
+                    ordenes_en_proceso[orden_a_confirmar]->setEstado(confirmacion);
+                    ordenes_confirmadas.push_back(ordenes_en_proceso[orden_a_confirmar]);
+                    fw->fileOpen("factura.txt");
+                    fw->write(ordenes_en_proceso[orden_a_confirmar]);
+                    fw->fileClose();
+                }
+                else{
+                    cout<<":)"<<endl;
+                }
+                
+            }
+            break;
+            case 9:{
+
             }
 
         }

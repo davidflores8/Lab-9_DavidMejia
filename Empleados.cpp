@@ -29,10 +29,15 @@ int Empleados::ganancias(){
     return ganancia;
 }
 
+void Empleados::aumentarOrdenes(){
+    total_ordenes=total_ordenes+1;
+}
+
 string Empleados::toString(){
     stringstream retorno;
+    ganancias();
     retorno<<"Nombre: "<<nombre<<"\nNumero de identidad: "<<id<<"\n"<<"\nEdad: "<<edad<<"\nHoras de trabajo: "<<horas_trabajo<<
-    "\nLocal de preferencia: "<<local<<"\n Total de ordenes: "<<total_ordenes;
+    "\nLocal de preferencia: "<<local<<"\n Total de ordenes: "<<total_ordenes<<"\nGanancia: "<<ganancia;
     return retorno.str();
 }
 

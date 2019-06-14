@@ -35,9 +35,14 @@ int Cliente::ganancias(){
     return ganancia;
 }
 
+void Cliente::aumentarPedido(){
+    pedidos=pedidos+1;
+}
+
 string Cliente::toString(){
     stringstream retorno;
+    ganancias();
     retorno<<"Nombre: "<<nombre<<"\nNumero de identidad: "<<id<<"\n"<<"\nEdad: "<<edad<<"\nDireccion: "<<direccion<<
-    "\nTelefono: "<<telefono<<"\n Tarjeta: "<<tarjeta<<"\n Cantidad de pedidos: "<<pedidos;
+    "\nTelefono: "<<telefono<<"\n Tarjeta: "<<tarjeta<<"\n Cantidad de pedidos: "<<pedidos<<"\nGanancias: "<<ganancia;
     return retorno.str();
 }

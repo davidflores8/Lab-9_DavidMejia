@@ -22,6 +22,10 @@ int Repartidor::getOrdenes(){
     return ordenes;
 }
 
+void Repartidor::aumentarOrden(){
+    ordenes=ordenes+1;
+}
+
 int Repartidor::ganancias(){
     int ganancias=0;
     ganancia=40*ordenes;
@@ -31,7 +35,8 @@ int Repartidor::ganancias(){
 
 string Repartidor::toString(){
     stringstream retorno;
+    ganancias();
     retorno<<"Nombre: "<<nombre<<"\nNumero de identidad: "<<id<<"\n"<<"\nEdad: "<<edad<<"\nPlaca de motocicleta: "<<placa<<
-    "\nZona de preferencia: "<<zona<<"\n Total de ordenes: "<<ordenes;
+    "\nZona de preferencia: "<<zona<<"\n Total de ordenes: "<<ordenes<<"\nGanancias: "<<ganancia;
     return retorno.str();
 }
