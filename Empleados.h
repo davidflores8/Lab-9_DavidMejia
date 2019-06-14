@@ -16,5 +16,6 @@ class Empleados:public Persona{
         string getLocal();
         int getTotal_ordenes();
         int ganancias();
+        string toString();
 };
 #endif

@@ -28,3 +28,10 @@ int Repartidor::ganancias(){
     ganancia=ganancias;
     return ganancia;
 }
+
+string Repartidor::toString(){
+    stringstream retorno;
+    retorno<<"Nombre: "<<nombre<<"\nNumero de identidad: "<<id<<"\n"<<"\nEdad: "<<edad<<"\nPlaca de motocicleta: "<<placa<<
+    "\nZona de preferencia: "<<zona<<"\n Total de ordenes: "<<ordenes;
+    return retorno.str();
+}

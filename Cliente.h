@@ -18,5 +18,6 @@ class Cliente:public Persona{
         int getTarjeta();
         int getPedidos();
         int ganancias();
+        string toString();
 };
 #endif

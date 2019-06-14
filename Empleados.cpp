@@ -29,3 +29,10 @@ int Empleados::ganancias(){
     return ganancia;
 }
 
+string Empleados::toString(){
+    stringstream retorno;
+    retorno<<"Nombre: "<<nombre<<"\nNumero de identidad: "<<id<<"\n"<<"\nEdad: "<<edad<<"\nHoras de trabajo: "<<horas_trabajo<<
+    "\nLocal de preferencia: "<<local<<"\n Total de ordenes: "<<total_ordenes;
+    return retorno.str();
+}
+

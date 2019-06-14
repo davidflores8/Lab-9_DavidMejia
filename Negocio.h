@@ -16,12 +16,14 @@ class Negocio{
         vector<Producto*>productos;
         
         Negocio();
-        Negocio(string, string);
+        Negocio(string, string, int);
 
         string getNombre();
         string getUbicacion();
         int getLocales();
+        
 
         vector<Producto*> getProductos();
+        void setProductos(vector<Producto*>);
 };
 #endif

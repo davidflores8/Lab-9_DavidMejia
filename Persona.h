@@ -1,5 +1,7 @@
 #include <string>
 using std::string;
+#include <sstream>
+using std::stringstream;
 
 #ifndef PERSONA_H
 #define PERSONA_H

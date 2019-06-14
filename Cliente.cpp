@@ -34,3 +34,10 @@ int Cliente::ganancias(){
     ganancia=ganancias;
     return ganancia;
 }
+
+string Cliente::toString(){
+    stringstream retorno;
+    retorno<<"Nombre: "<<nombre<<"\nNumero de identidad: "<<id<<"\n"<<"\nEdad: "<<edad<<"\nDireccion: "<<direccion<<
+    "\nTelefono: "<<telefono<<"\n Tarjeta: "<<tarjeta<<"\n Cantidad de pedidos: "<<pedidos;
+    return retorno.str();
+}

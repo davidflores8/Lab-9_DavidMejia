@@ -4,9 +4,10 @@ Negocio::Negocio(){
 
 }
 
-Negocio::Negocio(string name, string ubic){
+Negocio::Negocio(string name, string ubic, int locals){
     nombre=name;
     ubicacion=ubic;
+    locales=locals;
 }
 
 string Negocio::getNombre(){
@@ -23,4 +24,8 @@ int Negocio::getLocales(){
 
 vector<Producto*> Negocio::getProductos(){
     return productos;
+}
+
+void Negocio::setProductos(vector<Producto*> products){
+    productos=products;
 }

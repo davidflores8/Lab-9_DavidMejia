@@ -16,7 +16,7 @@ class Repartidor:public Persona{
         string getZona();
         int getOrdenes();
         int ganancias();
-
+        string toString();
 
 
 };
