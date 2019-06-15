@@ -18,6 +18,7 @@ using std::string;
 #include <vector>
 using std::vector;
 
+
 int main(){
     vector<Cliente*> clientes;
     vector<Repartidor*> repartidores;
@@ -33,7 +34,7 @@ int main(){
     int repartidor_seleccionado;
 
     int opcion=1;
-    while(opcion>0 && opcion<10){
+    while(opcion>0 && opcion<9){
         cout<<"-- Menu principal -- "<<endl;
         cout<<"1. Crear persona\n2. Crear Negocio"<<endl;
         cout<<"3. Listar personas\n4. Listar Negocios\n5. Eliminar personas\n6. Eliminar negocios"<<endl;
@@ -341,13 +342,57 @@ int main(){
                 
             }
             break;
-            case 9:{
-
-            }
-
         }
     }
+    if(opcion==9){
+            delete fw;
+            for (int i = 0; i < clientes.size(); i++)
+            {
+                delete clientes[i];
+                clientes[i]=NULL;
+            }
+            clientes.clear(); 
 
+            //
+            for (int i = 0; i <empleados.size(); i++)
+            {
+                delete empleados[i];
+                empleados[i]=NULL;
+            }
+            empleados.clear();
 
+            //
+            for (int i = 0; i <repartidores.size(); i++)
+            {
+                delete repartidores[i];
+                empleados[i]=NULL;
+            }
+            repartidores.clear();
+
+            //
+            for (int i = 0; i <ordenes_confirmadas.size(); i++)
+            {
+                delete ordenes_confirmadas[i];
+                ordenes_confirmadas[i]=NULL;
+            }
+            ordenes_confirmadas.clear();
+
+            //
+            for (int i = 0; i <ordenes_en_proceso.size(); i++)
+            {
+                delete ordenes_en_proceso[i];
+                ordenes_en_proceso[i]=NULL;
+            }
+            ordenes_en_proceso.clear();
+           
+           //
+           for (int i = 0; i <negocios.size(); i++)
+            {
+                delete negocios[i];
+                negocios[i]=NULL;
+            }
+            negocios.clear();
+
+    }
     return 0;
 }
